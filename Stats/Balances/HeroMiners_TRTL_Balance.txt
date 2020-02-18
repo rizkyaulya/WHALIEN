@@ -1,0 +1,16 @@
+{
+    "PoolName":  "HeroMiners",
+    "Currency":  "TRTL",
+    "Balance":  23011.12,
+    "Paid":  118924.9,
+    "Earnings":  2642.46,
+    "Earnings_1h":  0,
+    "Earnings_1d":  0,
+    "Earnings_1w":  0,
+    "Earnings_Avg":  0,
+    "Last_Earnings":  [
+
+                      ],
+    "Started":  "\/Date(1577859580162)\/",
+    "Updated":  "\/Date(1580626549006)\/"
+}

@@ -1,0 +1,62 @@
+﻿<!--#include file="/parts/head.html" -->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 id="title" data-navbaractive="navbestpools" class="h2">Best Pools</h1>
+</div>
+<p>Shows the pool for each algorithm that was selected as the most profitable</p>
+<table id="pools" class="table"
+  data-toggle="table"
+  data-url="/pools"
+  data-response-handler="formatPools"
+  data-filter-control="true"
+  data-filter-show-clear="true"
+  data-sort-order="asc"
+  data-sort-name="tAlgorithm"
+  data-cache="false"
+  data-show-columns="true"
+  data-show-toggle="true"
+  data-show-refresh="true"
+  data-icons-prefix="fa"
+  data-icons="icons"
+  data-detail-view="true"
+  data-detail-formatter="detailFormatter"
+>
+  <thead>
+      <tr>
+          <th data-field="tAlgorithm" data-sortable="true" data-filter-control="select">Algorithm</th>
+          <th data-field="Name" data-sortable="true" data-filter-control="select">Name</th>
+          <th data-field="tCoin" data-sortable="true" data-filter-control="select">Coin</th>
+          <th data-field="Price" data-align="right" data-sortable="true" data-formatter="formatPrices">BTC/GH/Day</th>
+          <th data-field="tErrorRatio" data-align="right" data-sortable="true">Act/Est</th>
+          <th data-field="Hashrate" data-align="right" data-sortable="true" data-formatter="formatHashRate">Hashrate</th>
+          <th data-field="BLK" data-align="right" data-sortable="true" data-formatter="formatBLK">TTF (min)</th>
+          <th data-field="TSL" data-align="right" data-sortable="true" data-formatter="formatTSL">Last (min)</th>
+          <th data-field="Host" data-sortable="true" data-filter-control="select">Host</th>
+          <th data-field="Updated" data-sortable="true" data-formatter="formatDate">Last Updated</th>
+      </tr>
+  </thead>
+</table>
+
+<!-- End of page scripts -->
+<script type="text/javascript">
+    $(function () {
+        function refreshTable() {
+            if (!$("table#pools tr.detail-view").length) $("table#pools").bootstrapTable("refresh", { silent: true });
+            window.setTimeout(refreshTable, 10000);
+        }
+        window.setTimeout(refreshTable, 10000);
+    });
+
+    function formatPools(data) {
+        // This function can alter the returned data before building the table, formatting it in a way
+        // that is easier to display and manipulate in a table
+        $.each(data, function (index, item) {
+            item.tAlgorithm = formatAlgorithm(item.Algorithm);
+            item.tCoin = item.Name == "MiningRigRentals" ? item.CoinName : item.CoinSymbol;
+            item.tErrorRatio = typeof item.ErrorRatio != "undefined" ? parseFloat(item.ErrorRatio).toFixed(3) : "-";
+            if (typeof item.tCoin == "undefined" || item.tCoin == null) {item.tCoin = ""}
+        });
+        return data;
+    }
+
+</script>
+<!--#include file="/parts/foot.html" -->

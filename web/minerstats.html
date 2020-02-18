@@ -1,0 +1,178 @@
+﻿<!--#include file="/parts/head.html" -->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 id="title" data-navbaractive="navminerstats" class="h2">Manage Miner Benchmarks</h1>
+</div>
+
+<div class="card-group mb-4">
+    <div class="card m-2">
+        <div class="card-header">
+            <h5>Benchmark Updated Miners</h5>
+        </div>
+        <div class="card-body">
+            <p>Reset the stats for all miners/algorithms, that have been updated lately and need a new benchmark.</p>
+            <p>These miners have been updated lately, but have not been executed since then. Therefor their benchmarks might be incorrect.</p>
+            <a href="#" id="resetneededbenchmarks" class="btn btn-primary">Benchmark Updated Miners</a>
+        </div>
+    </div>
+    <div class="card m-2">
+        <div class="card-header">
+            <h5>Benchmark Failed Miners</h5>
+        </div>
+        <div class="card-body">
+            <p>Clear the stats for miners that have a benchmarked hashrate of 0H/s.</p>
+            <p>These miners may have failed to benchmark properly, clearing their stats allows them to try benchmarking again.  You should watch closely for failed miners after doing this.</p>
+            <a href="#" id="resetzerohashrateminers" class="btn btn-primary">Benchmark Failed Miners</a>
+        </div>
+    </div>
+    <div class="card m-2">
+        <div class="card-header">
+            <h5>Reset All Benchmarks</h5>
+        </div>
+        <div class="card-body">
+            <p>Reset the stats for all miners.</p>
+            <p>To ensure your benchmarks are accurate, you should do this after hardware changes, changing overclock settings, driver updates, and miner updates. This will force benchmarking to start fresh.</p>
+            <a href="#" id="resetallbenchmarks" class="btn btn-danger">Benchmark All Miners</a>
+        </div>
+    </div>
+</div>
+
+<div class="card-group mb-4">
+  <div class="card">
+      <div class="card-header">
+          <h5>Benchmark Status</h5>
+      </div>
+      <div class="card-body">
+          <table id="minerstats" class="table"
+                 data-toggle="table"
+                 data-url="/minerstats"
+                 data-response-handler="formatMinerstats"
+                 data-filter-control="true"
+                 data-filter-show-clear="true"
+                 data-sort-order="asc"
+                 data-sort-name="tName"
+                 data-cache="false"
+                 data-show-columns="true"
+                 data-show-toggle="true"
+                 data-show-refresh="true"
+                 data-icons-prefix="fa"
+                 data-icons="icons"
+                 data-detail-view="true"
+                 data-detail-formatter="detailFormatter">
+              <thead>
+                  <tr>
+                      <th data-field="Name" data-sortable="true" data-filter-control="select" data-filter-strict-search="true">Name</th>
+                      <th data-field="tAlgorithm" data-sortable="true" data-filter-control="select" data-filter-strict-search="true">Algorithm</th>
+                      <th data-field="Devices" data-sortable="true" data-filter-control="select" data-filter-strict-search="true">Device</th>
+                      <th data-field="tOC" data-sortable="true" data-filter-control="select" data-filter-strict-search="true">OC</th>
+                      <th data-field="tSpeed" data-align="right" data-sortable="true">Speed</th>
+                      <th data-field="tRatio" data-sortable="true">Rejected</th>
+                      <th data-field="tPowerDraw" data-sortable="true">Power</th>
+                      <th data-field="tStatus" data-sortable="true" data-filter-control="select" data-filter-strict-search="true">Status</th>
+                      <th data-field="tButton" data-align="center">Bench</th>
+                  </tr>
+              </thead>
+          </table>
+      </div>
+  </div>
+</div>
+<style>
+    table#minerstats tbody .svg-inline--fa {margin-right:0}
+</style>
+
+<!-- End of page scripts -->
+<script>
+    $(function () {
+        $('#resetallbenchmarks').click(function () {
+            $('.modal-body').load('scripts/resetallbenchmarks.ps1', function () {
+                $('.modal-title').text('Reset All Benchmarks');
+                $('#myModal').modal({ show: true });
+            });
+        });
+
+        $('#resetneededbenchmarks').click(function () {
+            $('.modal-body').load('scripts/resetneededbenchmarks.ps1', function () {
+                $('.modal-title').text('Reset Needed Benchmarks');
+                $('#myModal').modal({ show: true });
+            });
+        });
+
+        $('#resetzerohashrateminers').click(function () {
+            $('.modal-body').load('scripts/resetzerohashrateminers.ps1', function () {
+                $('.modal-title').text('Reset 0H/s Miners');
+                $('#myModal').modal({ show: true });
+            });
+        });
+
+        $('#minerstats').on("post-body.bs.table", function () {
+            $('#minerstats button[name=benchmark]').click(function () {
+                var params = {
+                    name: $(this).attr('data-name').toString(),
+                    algorithm: $(this).attr('data-algorithm'),
+                    devicemodel: $(this).attr('data-devicemodel')
+                };
+                $('.modal-body').load('scripts/resetonebenchmark.ps1?' + jQuery.param(params), function () {
+                    $('.modal-title').text('Reset miner '+params.name.replace(/-GPU.+$/,'')+params.devicemodel+'-'+params.algorithm);
+                    $('#myModal').modal({ show: true });
+                });
+            });
+        });
+
+    });
+    function formatMinerstats(data) {
+        // This function can alter the returned data before building the table, formatting it in a way
+        // that is easier to display and manipulate in a table
+        $.each(data, function (index, item) {
+            item.tButton = '<button class="btn btn-default" type="button" name="benchmark" title="Start Benchmark" data-name="' + item.Name + '" data-algorithm="' + item.Algorithm + '" data-devicemodel="' + item.Devices + '"><i class="fa fa-sync"></i></button>';
+            var algo = new Array();
+            var speed = new Array();
+            var ratio = new Array();
+
+            algo.push(formatAlgorithm(item.Algorithm));
+            speed.push(formatHashRateValue(item.Speed[0]));
+            ratio.push(item.Ratio[0] != null? Math.round(parseFloat(item.Ratio[0])*10000)/100 + ' %' : '-.-- %');
+
+            if (item.SecondaryAlgorithm != "") {
+                algo.push(formatAlgorithm(item.SecondaryAlgorithm));
+                speed.push(formatHashRateValue(item.Speed[1]));
+                ratio.push(item.Ratio[1] != null? Math.round(parseFloat(item.Ratio[1])*10000)/100 + ' %' : '-.-- %');
+            }
+
+            item.tAlgorithm = algo.join(" / ");
+            item.tSpeed = speed.join(" / ");
+            item.tRatio = ratio.join(" / ");
+
+            // Format the device(s)
+            item.Name = item.Name.replace(/-GPU.+$/,'');
+            if (item.ManualUri && item.ManualUri.toString() != '') {
+                item.Name = '<a href="'+item.ManualUri.toString()+'" target="_blank" title="Official miner page">'+item.Name+'</a>';
+            }
+            item.tStatus = 'Ok';
+            if (item.Benchmarking) item.tStatus = 'Benchmarking';
+            else if (item.NeedsBenchmark) item.tStatus = 'Needs Benchmark'
+            else if (item.BenchmarkFailed) item.tStatus = 'Failed Benchmark'
+
+            // Format the Profile(s)
+            var tOC = new Array();
+            if (globalconfig.OCmode == "msia") {
+                if (item.MSIAprofile) { tOC.push("MSIA" + item.MSIAprofile); }
+            } else if (globalconfig.OCmode == "ocp") {
+                var devices = item.DeviceModel.toString().split(/\-/);
+                var cnt = devices.length
+                $.each(devices, function (ix, dev) {
+                    if (dev != "CPU" && item.OCprofile[dev]) {
+                        if (cnt == 1) { tOC.push(item.OCprofile[dev]); }
+                        else {
+                            tOC.push(dev + "=" + item.OCprofile[dev]);
+                        }
+                    }
+                });
+            }
+            if (!tOC.length) { tOC.push("-"); }
+            item.tOC = tOC.join('<br />');
+
+            item.tPowerDraw = Math.round(parseFloat(item.PowerDraw)) + ' W';
+        });
+        return data;
+    }
+</script>
+<!--#include file="/parts/foot.html" -->

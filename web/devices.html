@@ -1,0 +1,65 @@
+﻿<!--#include file="/parts/head.html" -->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 id="title" data-navbaractive="navdevices" class="h2">Devices</h1>
+</div>
+<p>These are the devices (GPUs and CPUs) detected by RainbowMiner.</p>
+<table id="devices" class="table"
+  data-toggle="table"
+  data-url="/devices"
+  data-response-handler="formatDevices"
+  data-cache="false"
+  data-show-columns="true"
+  data-show-toggle="true"
+  data-show-refresh="true"
+  data-icons-prefix="fa"
+  data-icons="icons"
+  data-detail-view="true"
+  data-detail-formatter="detailFormatter"
+>
+  <thead>
+      <tr>
+          <th data-field="Name" data-sortable="true" data-title-tooltip="The name, Rainbowminer uses to identify this device">Name</th>
+          <th data-field="Vendor" data-sortable="true" data-title-tooltip="Vendor of the device">Vendor</th>
+          <th data-field="Model" data-sortable="true" data-title-tooltip="Modelname of the device">Model</th>
+          <th data-field="tMemory" data-sortable="true" data-title-tooltip="Memory on the device in GB">Mem</th>
+          <th data-field="tTemperature" data-sortable="true" data-title-tooltip="Current temperature in °C">°C</th>
+          <th data-field="tTemperatureMax" data-sortable="true" data-title-tooltip="Maximum temperature in °C">max °C</th>
+          <th data-field="tFanSpeed" data-sortable="true" data-title-tooltip="Current fan speed in %">Fan</th>
+          <th data-field="tPowerDraw" data-sortable="true" data-title-tooltip="Current power draw in watt">Power</th>
+          <th data-field="tClock" data-sortable="true" data-title-tooltip="Current GPU clock in MHz">Clock</th>
+          <th data-field="tClockMem" data-sortable="true" data-title-tooltip="Current memory clock in MHz">Memclk</th>
+          <th data-field="tPowerLimitPercent" data-sortable="true" data-title-tooltip="Current power limit in %">PL</th>
+      </tr>
+  </thead>
+</table>
+
+<!-- End of page scripts -->
+<script type="text/javascript">
+  function formatDevices(data) {
+  // This function can alter the returned data before building the table, formatting it in a way
+  // that is easier to display and manipulate in a table
+  $.each(data, function(index, item) {
+    // Format the device(s)
+    if (item.OpenCL) {
+        item.tMemory = formatBytes(item.OpenCL.GlobalMemSize)
+        item.tDriverVersion = item.OpenCL.DriverVersion
+        item.tCores = item.OpenCL.MaxComputeUnits
+    } else {
+        item.tMemory = formatBytes(item.Data.CacheL3 * 1024 * 1024)
+        item.tDriverVersion = "N/A"
+        item.tCores = item.Data.Cores ? item.Data.Cores + "/" + item.Data.Threads : "N/A"
+    }
+    
+    item.tPowerDraw = typeof(item.Data.PowerDraw) !== "undefined"? Math.round(parseFloat(item.Data.PowerDraw)) + ' W' : "N/A"
+    item.tFanSpeed = typeof(item.Data.FanSpeed) !== "undefined"? item.Data.FanSpeed + ' %' : "N/A"
+    item.tClock = typeof(item.Data.Clock) !== "undefined"? item.Data.Clock + ' MHz' : "N/A"
+    item.tClockMem = typeof(item.Data.ClockMem) !== "undefined"? item.Data.ClockMem + ' MHz' : "N/A"
+    item.tPowerLimitPercent = typeof(item.Data.PowerLimitPercent) !== "undefined"? item.Data.PowerLimitPercent + ' %' : "N/A"
+    item.tTemperature = typeof (item.Data.Temperature) !== "undefined" && item.Data.Temperature? item.Data.Temperature + ' °C' : "N/A"
+    item.tTemperatureMax = typeof (item.DataMax.Temperature) !== "undefined" && item.Data.Temperature? item.DataMax.Temperature + ' °C' : "N/A"
+    item.tUtilization = typeof (item.Data.Utilization) !== "undefined" ? item.Data.Utilization + ' %' : "N/A"
+  });
+  return data;
+}
+</script>
+<!--#include file="/parts/foot.html" -->

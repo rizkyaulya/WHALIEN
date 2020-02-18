@@ -1,0 +1,8 @@
+﻿{
+    "AMD":  {
+                "Ellesmere-Vega56":  "1"
+            },
+    "NVIDIA":  {
+
+               }
+}

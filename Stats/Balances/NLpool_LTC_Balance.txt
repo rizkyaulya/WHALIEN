@@ -1,0 +1,31 @@
+{
+    "PoolName":  "NLpool",
+    "Currency":  "LTC",
+    "Balance":  0.00053070,
+    "Paid":  0,
+    "Earnings":  0.00053379,
+    "Earnings_1h":  0,
+    "Earnings_1d":  0,
+    "Earnings_1w":  0.00001217,
+    "Earnings_Avg":  0.00000174092890858598,
+    "Last_Earnings":  [
+                          {
+                              "Date":  "\/Date(1581318746418)\/",
+                              "Value":  0.00000014
+                          },
+                          {
+                              "Date":  "\/Date(1581335505201)\/",
+                              "Value":  0.00000011
+                          },
+                          {
+                              "Date":  "\/Date(1581504653589)\/",
+                              "Value":  0.00000853
+                          },
+                          {
+                              "Date":  "\/Date(1581506518663)\/",
+                              "Value":  0.00000339
+                          }
+                      ],
+    "Started":  "\/Date(1579940950332)\/",
+    "Updated":  "\/Date(1581506518663)\/"
+}

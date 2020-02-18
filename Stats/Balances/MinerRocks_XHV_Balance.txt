@@ -1,0 +1,23 @@
+{
+    "PoolName":  "MinerRocks",
+    "Currency":  "XHV",
+    "Balance":  0.9320911638,
+    "Paid":  25.7302,
+    "Earnings":  0.275866368696,
+    "Earnings_1h":  0,
+    "Earnings_1d":  0,
+    "Earnings_1w":  0.005537785897,
+    "Earnings_Avg":  0.00145657551526256,
+    "Last_Earnings":  [
+                          {
+                              "Date":  "\/Date(1581090983120)\/",
+                              "Value":  0.005021070924
+                          },
+                          {
+                              "Date":  "\/Date(1581318746418)\/",
+                              "Value":  0.000516714973
+                          }
+                      ],
+    "Started":  "\/Date(1579940950332)\/",
+    "Updated":  "\/Date(1581318746418)\/"
+}

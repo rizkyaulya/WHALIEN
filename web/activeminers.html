@@ -1,0 +1,141 @@
+﻿<!--#include file="/parts/head.html" -->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 id="title" class="h2" data-navbaractive="navactiveminers">Active Miners <span id="wtmbuttons"></span></h1>
+</div>
+<table id="miners" class="table"
+  data-toggle="table"
+  data-url="/activeminers"
+  data-response-handler="formatActiveMiners"
+  data-filter-control="true"
+  data-filter-show-clear="true"
+  data-sort-order="desc"
+  data-sort-name="Profit"
+  data-cache="false"
+  data-show-columns="true"
+  data-show-toggle="true"
+  data-show-refresh="true"
+  data-icons-prefix="fa"
+  data-icons="icons"
+  data-detail-view="true"
+  data-detail-formatter="detailFormatter"
+>
+  <thead>
+      <tr>
+          <th data-field="Name" data-sortable="true" data-filter-control="select">Name</th>
+          <th data-field="tDevices" data-sortable="true" data-filter-control="select" data-filter-strict-search="true">Devices</th>
+          <th data-field="tOC" data-sortable="true" data-filter-control="select" data-filter-strict-search="true">OC</th>
+          <th data-field="Profit" data-align="right" data-sortable="true" data-formatter="formatPricesBTC">Profit</th>
+          <th data-field="tRevenue" data-align="right" data-sortable="true" data-formatter="formatPricesBTC">Revenue</th>
+          <th data-field="tPowerDraw" data-sortable="true">Power</th>
+          <th data-field="tEff" data-align="right" data-sortable="true" data-formatter="formatBTCEff">sat/W</th>
+          <th data-field="tPrimaryAlgorithm" data-sortable="true" data-filter-control="select">Algorithm</th>
+          <th data-field="tPrimarySpeed" data-align="right" data-sortable="true" data-formatter="formatHashRateValue">Speed 1</th>
+          <!-- th data-field="tSecondaryAlgorithm" data-sortable="true" data-filter-control="select">2nd Algo</th -->
+          <th data-field="tSecondarySpeed" data-align="right" data-sortable="true" data-formatter="formatHashRateValue">Speed 2</th>
+          <th data-field="tDevFee" data-align="right" data-sortable="true">Fee</th>
+      </tr>
+  </thead>
+</table>
+
+<!-- End of page scripts -->
+<script type="text/javascript">
+    $(function () {
+        function refreshTable() {
+            if (!$("table#miners tr.detail-view").length) $("table#miners").bootstrapTable("refresh", { silent: true });
+            window.setTimeout(refreshTable, 10000);
+        }
+        window.setTimeout(refreshTable, 10000);
+    });
+
+    function formatBTCEff(data) {
+        if (typeof data == "undefined" || !data) return "-";
+        var value = parseFloat(data) * 1e8;
+        return value.toFixed(2).toString();
+    }
+
+    function sleep(milliseconds) {
+        return new Promise(resolve => setTimeout(resolve, milliseconds));
+    }
+
+    function formatActiveMiners(data) {
+        // This function can alter the returned data before building the table, formatting it in a way
+        // that is easier to display and manipulate in a table
+
+        var devicemodels = new Array();
+
+        $.each(data, function (index, item) {
+            // Format the algorithm(s)
+            item.tPrimaryAlgorithm = formatAlgorithm(item.Algorithm[0]);
+            item.tSecondaryAlgorithm = formatAlgorithm(item.Algorithm[1]);
+            item.tDevFee = (parseFloat(item.DevFee[item.Algorithm[0]]) ? parseFloat(item.DevFee[item.Algorithm[0]]) + ' %' : '-');
+            item.tPrimarySpeed = item.Speed[0];
+
+            // Format the speed(s)
+            if (item.Speed.length > 1) {
+                item.tSecondarySpeed = item.Speed[1];
+                item.tPrimaryAlgorithm += ' + ' + item.tSecondaryAlgorithm;
+                if (parseFloat(item.DevFee[item.Algorithm[1]])) {
+                    item.tDevFee += '/' + parseFloat(item.DevFee[item.Algorithm[1]]) + ' %';
+                }
+            }
+
+            // Format the device(s)
+            item.tDevices = item.DeviceModel.toString();
+            item.Name = item.Name.split(/\-/)[0];
+            if (item.ManualUri && item.ManualUri.toString() != '') {
+                item.Name = '<a href="'+item.ManualUri.toString()+'" target="_blank" title="Official miner page">'+item.Name+'</a>';
+            }
+
+            var powerDraw = parseFloat(item.PowerDraw);
+            item.tPowerDraw = Math.round(powerDraw) + ' W';
+
+            item.tRevenue = parseFloat(item.Profit)
+            if (globalconfig.UsePowerPrice) {
+                item.tRevenue += parseFloat(item.Profit_Cost)
+            }
+
+            item.tEff = 0;
+            if (powerDraw > 0) {
+                item.tEff = item.tRevenue / powerDraw;
+            }
+
+            // Format the Profile(s)
+            var tOC = new Array();
+            if (globalconfig.OCmode == "msia") {
+                if (item.MSIAprofile) { tOC.push("MSIA" + item.MSIAprofile); }
+            } else if (globalconfig.OCmode == "ocp") {
+                var devices = item.DeviceModel.toString().split(/\-/);
+                var cnt = devices.length
+                $.each(devices, function (ix, dev) {
+                    if (dev != "CPU" && item.OCprofile[dev]) {
+                        if (cnt == 1) { tOC.push(item.OCprofile[dev]); }
+                        else {
+                            tOC.push(dev + "=" + item.OCprofile[dev]);
+                        }
+                    }
+                });
+            }
+            if (!tOC.length) { tOC.push("-"); }
+            item.tOC = tOC.join('<br />');
+            if (devicemodels.indexOf(item.DeviceModel)==-1) devicemodels.push(item.DeviceModel);
+        });
+
+        $.ajax({
+            url: '/getwtmurls', success: function (result) {
+                var wtmbuttons = '';
+                devicemodels.sort(function (a, b) {
+                    if (a < b) return -1;
+                    if (a > b) return 1;
+                    return 0;
+                }
+                )
+                $.each(devicemodels, function (ix,device) {
+                    wtmbuttons += '<a href="' + result[device] + '" target="_blank" class="btn btn-primary">WTM ' + device + '</a> ';
+                });
+                $('#wtmbuttons').html(wtmbuttons);
+            }
+        });
+        return data;
+    }
+</script>
+<!--#include file="/parts/foot.html" -->

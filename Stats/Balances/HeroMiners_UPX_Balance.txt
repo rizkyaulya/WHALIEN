@@ -1,0 +1,31 @@
+{
+    "PoolName":  "HeroMiners",
+    "Currency":  "UPX",
+    "Balance":  427.74,
+    "Paid":  8512.8,
+    "Earnings":  3033.38,
+    "Earnings_1h":  0,
+    "Earnings_1d":  0,
+    "Earnings_1w":  81.28,
+    "Earnings_Avg":  12.4128426879901,
+    "Last_Earnings":  [
+                          {
+                              "Date":  "\/Date(1581356975313)\/",
+                              "Value":  3.01
+                          },
+                          {
+                              "Date":  "\/Date(1581366350503)\/",
+                              "Value":  39.55
+                          },
+                          {
+                              "Date":  "\/Date(1581368109262)\/",
+                              "Value":  37.03
+                          },
+                          {
+                              "Date":  "\/Date(1581796385936)\/",
+                              "Value":  1.69
+                          }
+                      ],
+    "Started":  "\/Date(1579940950332)\/",
+    "Updated":  "\/Date(1581796385936)\/"
+}

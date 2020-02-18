@@ -1,0 +1,163 @@
+﻿<!--#include file="/parts/head.html" -->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 id="title" data-navbaractive="navallminers" class="h2">Miners</h1>
+</div>
+<table id="miners" class="table"
+       data-toggle="table"
+       data-url="/miners"
+       data-response-handler="formatMiners"
+       data-filter-control="true"
+       data-filter-show-clear="true"
+       data-sort-order="desc"
+       data-sort-name="Profit"
+       data-cache="false"
+       data-show-columns="true"
+       data-show-toggle="true"
+       data-show-refresh="true"
+       data-icons-prefix="fa"
+       data-icons="icons"
+       data-checkbox-header="false"
+       data-detail-view="true"
+       data-detail-formatter="detailFormatter">
+    <thead>
+        <tr>
+            <th data-field="tEnabled" data-align="center" data-sortable="true" data-formatter="formatEnable">On/Off</th>
+            <th data-field="Name" data-sortable="true" data-filter-control="select" data-filter-strict-search="true" data-formatter="formatName">Name</th>
+            <th data-field="tDevices" data-sortable="true" data-filter-control="select" data-filter-strict-search="true">Devices</th>
+            <th data-field="tOC" data-sortable="true" data-filter-control="select" data-filter-strict-search="true">OC</th>
+            <th data-field="Profit" data-align="right" data-sortable="true" data-formatter="formatPricesBTC">Profit</th>
+            <th data-field="tRevenue" data-align="right" data-sortable="true" data-formatter="formatPricesBTC">Revenue</th>
+            <th data-field="tPowerDraw" data-sortable="true">Power</th>
+            <th data-field="tEff" data-align="right" data-sortable="true" data-formatter="formatBTCEff">sat/W</th>
+            <th data-field="tPrimaryAlgorithm" data-sortable="true" data-filter-control="select" data-filter-strict-search="true">Algorithm</th>
+            <th data-field="tPrimaryHashRate" data-align="right" data-sortable="true" data-formatter="formatHashRateValue">Speed 1</th>
+            <!-- th data-field="tSecondaryAlgorithm" data-sortable="true" data-filter-control="select" data-filter-strict-search="true">2nd Algo</th -->
+            <th data-field="tSecondaryHashRate" data-align="right" data-sortable="true" data-formatter="formatHashRateValue">Speed 2</th>
+            <th data-field="tDevFee" data-align="right" data-sortable="true">Fee</th>
+        </tr>
+    </thead>
+</table>
+
+<!-- End of page scripts -->
+<script type="text/javascript">
+    var $table = $('table#miners')
+
+    /*
+    $table.on('all.bs.table', function (e, name, args) {
+        console.log(name, args)
+    })
+    */
+
+
+    $(function () {
+        function refreshTable() {            
+            if (!$("table#miners tr.detail-view").length) $("table#miners").bootstrapTable("refresh", { silent: true });
+            window.setTimeout(refreshTable, 30000);
+        }
+        //window.setTimeout(refreshTable, 30000);
+
+        $table.on('load-success.bs.table', function (e, data) {
+            $.getJSON("/disabled", function (disabled) {
+                $.each(data, function (index, item) {
+                    var algos = item.BaseAlgorithm.split(/-/)
+                    var disable = false
+                    if (disabled.length) {
+                        for (i = 0; !disable && i < algos.length; i++) {
+                            var name = item.Name + '_' + algos[i] + '_HashRate'
+                            if (disabled.indexOf(name) > -1) { disable = true }
+                        }
+                    }
+                    if (disable && item.tEnabled) { $table.bootstrapTable('updateCell', { index: index, field: 'tEnabled', value: false, reinit: false }) }
+                    else if (!disable && !item.tEnabled) { $table.bootstrapTable('updateCell', { index: index, field: 'tEnabled', value: true, reinit: false }) }
+                })
+            })
+        })
+        $table.on("change", "input[type='checkbox'].enable-switch", function (event) {
+            event.preventDefault();
+            var data = $table.bootstrapTable('getData')
+            var index = parseInt($(this).attr("id").split(/-/)[1])
+            $.getJSON("/action/toggleminer?name=" + encodeURIComponent(data[index].Name) + "&algorithm=" + encodeURIComponent(data[index].BaseAlgorithm) + "&devicemodel=" + encodeURIComponent(data[index].DeviceModel), function (res) {
+                if (res.Status) {
+                    $table.bootstrapTable('updateCell', { index: index, field: 'tEnabled', value: !res.Disabled, reinit: false })
+                }
+            })
+        })
+    });
+
+    function formatBTCEff(data) {
+        if (typeof data == "undefined" || !data) return "-";
+        var value = parseFloat(data) * 1e8;
+        return value.toFixed(2).toString();
+    }
+
+    function formatEnable(value, item, index) {
+        return [
+                    '<div class="custom-control custom-switch">',
+                    '<input type="checkbox" class="custom-control-input enable-switch" id="switch-' + index + '"' + (value ? ' checked' : '') + '>',
+                    '<label class="custom-control-label" for="switch-' + index + '"></label>',
+                    '</div>'
+        ].join('')
+    }
+
+    function formatName(value, item, index) {
+        var Name = item.Name.split(/\-/)[0];
+        if (item.ManualUri && item.ManualUri.toString() != '') {
+            Name = '<a href="' + item.ManualUri.toString() + '" target="_blank" title="Official miner page">' + Name + '</a>';
+        }
+        return Name
+    }
+
+    function formatMiners(data) {
+        // This function can alter the returned data before building the table, formatting it in a way
+        // that is easier to display and manipulate in a table
+        $.each(data, function (index, item) {
+            // Format the device(s)
+            item.tEnabled = !item.Disabled
+            item.tDevices = item.DeviceModel.toString();
+
+            // Format the algorithms and hashrates
+            var algorithms = Object.keys(item.HashRates);
+            item.tPrimaryAlgorithm = formatAlgorithm(algorithms[0]);
+            item.tSecondaryAlgorithm = formatAlgorithm(algorithms[1]);
+            item.tPrimaryHashRate = item.HashRates[algorithms[0]];
+            item.tSecondaryHashRate = item.HashRates[algorithms[1]];
+            item.tDevFee = parseFloat(item.DevFee[algorithms[0]])? parseFloat(item.DevFee[algorithms[0]]) + ' %':'-';
+            if (typeof item.DevFee[algorithms[1]] !== "undefined" && item.DevFee[algorithms[1]] !== null && parseFloat(item.DevFee[algorithms[1]])) { item.tDevFee += '/' + parseFloat(item.DevFee[algorithms[1]]) + ' %'; }
+            if (item.tSecondaryAlgorithm) item.tPrimaryAlgorithm += ' + ' + item.tSecondaryAlgorithm;
+
+            var powerDraw = parseFloat(item.PowerDraw);
+            item.tPowerDraw = Math.round(powerDraw) + ' W';
+
+            item.tRevenue = parseFloat(item.Profit)
+            if (globalconfig.UsePowerPrice) {
+                item.tRevenue += parseFloat(item.Profit_Cost)
+            }
+
+            item.tEff = 0;
+            if (powerDraw > 0) {
+                item.tEff = item.tRevenue / powerDraw;
+            }
+
+            // Format the Profile(s)
+            var tOC = new Array();
+            if (globalconfig.OCmode == "msia") {
+                if (item.MSIAprofile) { tOC.push("MSIA" + item.MSIAprofile); }
+            } else if (globalconfig.OCmode == "ocp") {
+                var devices = item.DeviceModel.toString().split(/\-/);
+                var cnt = devices.length
+                $.each(devices, function (ix, dev) {
+                    if (dev != "CPU" && item.OCprofile[dev]) {
+                        if (cnt == 1) { tOC.push(item.OCprofile[dev]); }
+                        else {
+                            tOC.push(dev + "=" + item.OCprofile[dev]);
+                        }
+                    }
+                });
+            }
+            if (!tOC.length) { tOC.push("-"); }
+            item.tOC = tOC.join('<br />');
+        });
+        return data;
+    }
+</script>
+<!--#include file="/parts/foot.html" -->

@@ -1,0 +1,16 @@
+{
+    "PoolName":  "CryptoKnight",
+    "Currency":  "XWP",
+    "Balance":  0.00264918436,
+    "Paid":  0,
+    "Earnings":  0,
+    "Earnings_1h":  0,
+    "Earnings_1d":  0,
+    "Earnings_1w":  0,
+    "Earnings_Avg":  0,
+    "Last_Earnings":  [
+
+                      ],
+    "Started":  "\/Date(1567730247816)\/",
+    "Updated":  "\/Date(1567730247816)\/"
+}

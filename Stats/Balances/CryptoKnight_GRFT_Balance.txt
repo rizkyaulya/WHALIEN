@@ -1,0 +1,16 @@
+{
+    "PoolName":  "CryptoKnight",
+    "Currency":  "GRFT",
+    "Balance":  2.459492122,
+    "Paid":  0,
+    "Earnings":  0.8933378684,
+    "Earnings_1h":  0,
+    "Earnings_1d":  0,
+    "Earnings_1w":  0,
+    "Earnings_Avg":  0,
+    "Last_Earnings":  [
+
+                      ],
+    "Started":  "\/Date(1567354957645)\/",
+    "Updated":  "\/Date(1568791499829)\/"
+}

@@ -1,0 +1,16 @@
+{
+    "PoolName":  "Nanopool",
+    "Currency":  "XMR",
+    "Balance":  0.000036715487116945,
+    "Paid":  0,
+    "Earnings":  0,
+    "Earnings_1h":  0,
+    "Earnings_1d":  0,
+    "Earnings_1w":  0,
+    "Earnings_Avg":  0,
+    "Last_Earnings":  [
+
+                      ],
+    "Started":  "\/Date(1576563846876)\/",
+    "Updated":  "\/Date(1576563846876)\/"
+}

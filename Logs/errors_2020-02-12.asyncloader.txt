@@ -1,0 +1,9 @@
+﻿[2020-02-12 14:27:04] Catch error job 2B38A41E40BC2100A5FB8B92FF276113 with https://data.miningpoolstats.stream/data/list/moneroocean.stream.js?t={unixtimestamp} using REST: The process cannot access the file 'C:\Users\rizky mining\Videos\RIG1 Client\Cache\2B38A41E40BC2100A5FB8B92FF276113.asy' because it is being used by another process.
+[2020-02-12 16:37:55] The operation has timed out.
+[2020-02-12 16:37:55] The operation has timed out.
+[2020-02-12 23:11:29] Error job 1D4805F790AD7953D92594B80E648124 with https://api2.nicehash.com/main/api/v2/public/simplemultialgo/info/ using REST: Problem fetching https://api2.nicehash.com/main/api/v2/public/simplemultialgo/info/ using REST: The request was aborted: The operation has timed out.
+[2020-02-12 23:11:39] Error job AB88C0C3CF2AD655BE82469CE6957F2B with http://api.zergpool.com:8080/api/currencies using REST: Problem fetching http://api.zergpool.com:8080/api/currencies using REST: The request was aborted: The operation has timed out.
+[2020-02-12 23:11:39] The request was aborted: The operation has timed out.
+[2020-02-12 23:11:39] The request was aborted: The operation has timed out.
+[2020-02-12 23:11:39] The request was aborted: The operation has timed out.
+[2020-02-12 23:11:39] The request was aborted: The operation has timed out.

@@ -1,0 +1,16 @@
+{
+    "PoolName":  "HeroMiners",
+    "Currency":  "XWP",
+    "Balance":  0.579996103302,
+    "Paid":  0,
+    "Earnings":  0,
+    "Earnings_1h":  0,
+    "Earnings_1d":  0,
+    "Earnings_1w":  0,
+    "Earnings_Avg":  0,
+    "Last_Earnings":  [
+
+                      ],
+    "Started":  "\/Date(1579940950332)\/",
+    "Updated":  "\/Date(1579940950332)\/"
+}

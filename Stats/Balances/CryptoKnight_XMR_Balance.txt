@@ -1,0 +1,16 @@
+{
+    "PoolName":  "CryptoKnight",
+    "Currency":  "XMR",
+    "Balance":  0.000062541122,
+    "Paid":  0,
+    "Earnings":  0.000035813938,
+    "Earnings_1h":  0,
+    "Earnings_1d":  0,
+    "Earnings_1w":  0,
+    "Earnings_Avg":  0,
+    "Last_Earnings":  [
+
+                      ],
+    "Started":  "\/Date(1567464122581)\/",
+    "Updated":  "\/Date(1572581922893)\/"
+}

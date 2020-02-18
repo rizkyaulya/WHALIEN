@@ -1,0 +1,147 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20200217140227
+Username: RIG3\rizky mining
+RunAs User: RIG3\rizky mining
+Configuration Name: 
+Machine: RIG3 (Microsoft Windows NT 10.0.18362.0)
+Host Application: powershell -version 5.0 -executionpolicy bypass -windowstyle normal -command & {.\rainbowminer.ps1 -configfile .\Config\config.txt -setuponly; exit $lastexitcode}
+Process ID: 6752
+PSVersion: 5.1.18362.628
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.18362.628
+BuildVersion: 10.0.18362.628
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is .\Logs\Setup_2020-02-17_14-02-27.txt
+__________        .__      ___.                   _____  .__
+\______   \_____  |__| ____\_ |__   ______  _  __/     \ |__| ____   ___________
+ |       _/\__  \ |  |/    \| __ \ /  _ \ \/ \/ /  \ /  \|  |/    \_/ __ \_  __ \
+ |    |   \ / __ \|  |   |  \ \_\ (  <_> )     /    Y    \  |   |  \  ___/|  | \/
+ |____|_  /(____  /__|___|  /___  /\____/ \/\_/\____|__  /__|___|  /\___  >__|
+        \/      \/        \/    \/                     \/        \/     \/
+
+Starting setup for v4.5.3.5! Please wait..
+
+Detecting devices ..
+Initialize configuration ..
+Read configuration ..
+
+*** RainbowMiner Configuration ***
+
+Please choose, what to configure:
+
+- Wallet: setup wallet addresses, worker- and username, API-keys
+- Common: setup the most common RainbowMiner settings and flags
+- Energycosts: setup energy consumtion values
+- Selection: select which pools, miners, algorithm to use
+- All: step through the full setup, configuring all
+- Miners: finetune miners, add commandline arguments, penalty values and more (only for the technical savy user)
+- Pools: finetune pools, add different coin wallets, penalty values and more
+- Devices: finetune devices, select algorithms, coins and more
+- Algorithms: finetune global settings for algorithms, penalty, minimum hasrate and more
+- Coins: finetune global settings for dedicated coins, wallets, penalty, minimum hasrate and more
+- OC-Profiles: create or edit overclocking profiles
+- Network: API and client/server setup for multiple rigs within one network
+- Scheduler: different power prices and selective pause for timespans
+
+
+*** Network Configuration ***
+
+Hints (read them all! It will make entering data much easier):
+
+- press Return to accept the defaults
+- fields marked with * are mandatory
+- use comma "," to separate list entries
+- add new entries to a list, by adding a "+" in front of your input
+- remove entries from a list, by adding a "-" in front of your input
+- enter "list" or "help" to show a list of all valid entries
+- enter "back" or "<" to repeat the last input
+- enter "delete" to clear a non-mandatory entry
+- enter "save" or "done" to end config and save changes
+- enter "exit" or "cancel" to abort without any changes to the configuration
+
+
+Server connected successfully!
+
+PS>TerminatingError(): "cancel"
+
+Cancelled without changing the configuration
+
+
+*** RainbowMiner Configuration ***
+
+Please choose, what to configure:
+
+- Wallet: setup wallet addresses, worker- and username, API-keys
+- Common: setup the most common RainbowMiner settings and flags
+- Energycosts: setup energy consumtion values
+- Selection: select which pools, miners, algorithm to use
+- All: step through the full setup, configuring all
+- Miners: finetune miners, add commandline arguments, penalty values and more (only for the technical savy user)
+- Pools: finetune pools, add different coin wallets, penalty values and more
+- Devices: finetune devices, select algorithms, coins and more
+- Algorithms: finetune global settings for algorithms, penalty, minimum hasrate and more
+- Coins: finetune global settings for dedicated coins, wallets, penalty, minimum hasrate and more
+- OC-Profiles: create or edit overclocking profiles
+- Network: API and client/server setup for multiple rigs within one network
+- Scheduler: different power prices and selective pause for timespans
+
+
+*** Network Configuration ***
+
+Hints (read them all! It will make entering data much easier):
+
+- press Return to accept the defaults
+- fields marked with * are mandatory
+- use comma "," to separate list entries
+- add new entries to a list, by adding a "+" in front of your input
+- remove entries from a list, by adding a "-" in front of your input
+- enter "list" or "help" to show a list of all valid entries
+- enter "back" or "<" to repeat the last input
+- enter "delete" to clear a non-mandatory entry
+- enter "save" or "done" to end config and save changes
+- enter "exit" or "cancel" to abort without any changes to the configuration
+
+
+Server connected successfully!
+
+
+Select all config parameters, that should not be overwritten with the server's config
+
+
+Configfiles downloaded successfully!
+
+
+
+Changes written to configuration.
+
+
+*** RainbowMiner Configuration ***
+
+Please choose, what to configure:
+
+- Wallet: setup wallet addresses, worker- and username, API-keys
+- Common: setup the most common RainbowMiner settings and flags
+- Energycosts: setup energy consumtion values
+- Selection: select which pools, miners, algorithm to use
+- All: step through the full setup, configuring all
+- Miners: finetune miners, add commandline arguments, penalty values and more (only for the technical savy user)
+- Pools: finetune pools, add different coin wallets, penalty values and more
+- Devices: finetune devices, select algorithms, coins and more
+- Algorithms: finetune global settings for algorithms, penalty, minimum hasrate and more
+- Coins: finetune global settings for dedicated coins, wallets, penalty, minimum hasrate and more
+- OC-Profiles: create or edit overclocking profiles
+- Network: API and client/server setup for multiple rigs within one network
+- Scheduler: different power prices and selective pause for timespans
+
+
+Exiting configuration setup - now run Start.bat. Happy mining!
+
+**********************
+Windows PowerShell transcript end
+End time: 20200217140353
+**********************

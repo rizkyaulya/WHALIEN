@@ -1,0 +1,28 @@
+﻿{
+    "Ryzen.+[12][2-7]00 ": 65,
+    "Ryzen.+[12][2-7]00E": 45,
+    "Ryzen.+[12][2-5]00X": 65,
+    "Ryzen.+1[6-8]00X": 95,
+    "Ryzen.+2600X": 95,
+    "Ryzen.+2700X": 105,
+    "Ryzen.+[12]9[025]0": 180,
+    "Ryzen.+29[79]0": 250,
+
+    "Intel.+Core.+i3-6100U": 15,
+    "Intel.+Core.+i5-5257U": 28,
+    "Intel.+Core.+i5-6400 ": 65,
+    "Intel.+Core.+i5-7500 ": 65,
+    "Intel.+Core.+i5-7500T": 35,
+    "Intel.+Core.+i5-7600 ": 65,
+    "Intel.+Core.+i5-7600K": 91,
+    "Intel.+Core.+i5-7600T": 35,
+    "Intel.+Core.+i7-7500U": 15,
+    "Intel.+Core.+i7-7560U": 15,
+    "Intel.+Core.+i7-7567U": 28,
+    "Intel.+Core.+i7-7600U": 15,
+    "Intel.+Core.+i7-7660U": 15,
+    "Intel.+Core.+i7-7700 ": 65,
+    "Intel.+Core.+i7-7700K": 91,
+    "Intel.+Core.+i7-7700T": 35,
+    "Intel.+Pentium.+G4560": 54
+}

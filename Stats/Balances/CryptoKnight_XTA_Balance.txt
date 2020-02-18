@@ -1,0 +1,19 @@
+{
+    "PoolName":  "CryptoKnight",
+    "Currency":  "XTA",
+    "Balance":  0.07312231815,
+    "Paid":  161.167,
+    "Earnings":  10.149253957775,
+    "Earnings_1h":  0,
+    "Earnings_1d":  0,
+    "Earnings_1w":  0.072528076586,
+    "Earnings_Avg":  0.0356285739120505,
+    "Last_Earnings":  [
+                          {
+                              "Date":  "\/Date(1571721768511)\/",
+                              "Value":  0.072528076586
+                          }
+                      ],
+    "Started":  "\/Date(1570169615796)\/",
+    "Updated":  "\/Date(1571721768511)\/"
+}

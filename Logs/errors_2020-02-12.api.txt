@@ -1,0 +1,1 @@
+﻿[2020-02-12 21:07:59] Response not sent: Exception calling "Write" with "1" argument(s): "An operation was attempted on a nonexistent network connection"
