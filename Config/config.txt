@@ -121,5 +121,6 @@
     "MaxDownloadfileDays":  14,
     "MaxCachefileDays":  14,
     "EnableMinerBackups":  "0",
-    "EnableKeepDownloads":  "0"
+    "EnableKeepDownloads":  "0",
+    "EnableDebugMode":  "$EnableDebugMode"
 }
