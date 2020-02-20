@@ -27,6 +27,7 @@
     "ExcludeServerConfigVars":  "WorkerName,DeviceName,Proxy,APIPort,APIUser,APIPassword,APIAuth,MSIApath,NVSMIpath,CPUMiningThreads,CPUMiningAffinity,GPUMiningAffinity,ServerName,ServerPort,ServerUser,ServerPassword,EnableServerConfig,ServerConfigName,ExcludeServerConfigVars,RunMode,StartPaused,GroupName,pools:MiningRigRentals:API_Key,pools:MiningRigRentals:API_Secret",
     "EnableRestartComputer":  "0",
     "RestartComputerHours":  0,
+    "EnableDebugMode":  "$EnableDebugMode",
     "VersionCompatibility":  "4.3.3.1",
     "RebootOnGPUFailure":  "$RebootOnGPUFailure",
     "ExcludeMinersWithFee":  "$ExcludeMinersWithFee",
@@ -39,7 +40,7 @@
     "Wallet":  "1JmWKF5Ayfk61RLmYpXwFo4anHSmsepS5h",
     "Region":  "sg",
     "Currency":  "BTC,USD,IDR",
-    "PoolName":  "F2pool,HashVault,HeroMiners,MinerRocks,MoneroOcean,NiceHash,NLpool,SparkPool,ZergPool",
+    "PoolName":  "6Block,F2pool,HashVault,HeroMiners,MinerRocks,MoneroOcean,NiceHash,NLpool,SparkPool,ZergPool",
     "ExcludePoolName":  "",
     "MinerName":  "",
     "ExcludeMinerName":  "",
@@ -121,6 +122,5 @@
     "MaxDownloadfileDays":  14,
     "MaxCachefileDays":  14,
     "EnableMinerBackups":  "0",
-    "EnableKeepDownloads":  "0",
-    "EnableDebugMode":  "$EnableDebugMode"
+    "EnableKeepDownloads":  "0"
 }

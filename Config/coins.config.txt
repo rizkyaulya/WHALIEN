@@ -175,28 +175,6 @@
                 "Comment":  "",
                 "EnableAutoPool":  "1"
             },
-    "UPX":  {
-                "Penalty":  "0",
-                "MinHashrate":  "0",
-                "MinWorkers":  "0",
-                "MaxTimeToFind":  "0",
-                "Wallet":  "UPi1N2zx8FfHpfJuJ5d8zP767uWqakcaLEgSwDALF5ELh3JcwAXQ3B5DenGnEger4s6pNK3gAe7sD1WNmkPCXvQQFDPVmvtA9rS7u5k5V3EXD",
-                "PostBlockMining":  "0",
-                "MinProfitPercent":  "0",
-                "Comment":  "",
-                "EnableAutoPool":  "1"
-            },
-    "XCASH":  {
-                  "Penalty":  0,
-                  "MinHashrate":  "0",
-                  "MinWorkers":  "0",
-                  "MaxTimeToFind":  "0",
-                  "Wallet":  "XCBzxctXm2AF4uSPWE1YS5HkgBLaKLNabZzyUNYERd725r9REwJSE38f3kXZB2SqCcWGVUcAnzoRy4XUQY4FJ6vR2FRsYAXM7MM9SrTAUAZvmz",
-                  "PostBlockMining":  "0",
-                  "MinProfitPercent":  0,
-                  "Comment":  "",
-                  "EnableAutoPool":  "1"
-              },
     "XMR":  {
                 "Penalty":  "0",
                 "MinHashrate":  "0",
@@ -246,10 +224,10 @@
                 "MinHashrate":  "0",
                 "MinWorkers":  "0",
                 "MaxTimeToFind":  "0",
-                "Wallet":  "fi371vX9nG9fUFD4DEGHMC8axwSBbUhy8Eqr7r1zYbVUcYLaEdgeqeLj24DYzoQb26TodLoEoa484TqP1VtwTzrP3CsaLodaZHg2Y2EyVgEJ",
+                "Wallet":  "",
+                "EnableAutoPool":  "0",
                 "PostBlockMining":  "0",
                 "MinProfitPercent":  "0",
-                "Comment":  "",
-                "EnableAutoPool":  "1"
+                "Comment":  ""
             }
 }

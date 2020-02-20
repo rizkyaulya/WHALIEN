@@ -3,30 +3,10 @@
                 "Algorithm":  "",
                 "ExcludeAlgorithm":  "",
                 "MinerName":  "",
-                "ExcludeMinerName":  "XMRIG",
+                "ExcludeMinerName":  "",
                 "DisableDualMining":  "",
                 "DefaultOCprofile":  "",
                 "PowerAdjust":  "100",
                 "Worker":  ""
-            },
-    "Ellesmere":  {
-                      "DefaultOCprofile":  "Profile2",
-                      "Algorithm":  "",
-                      "ExcludeAlgorithm":  "",
-                      "MinerName":  "",
-                      "ExcludeMinerName":  "XMRIG",
-                      "DisableDualMining":  "",
-                      "PowerAdjust":  "100",
-                      "Worker":  ""
-                  },
-    "Vega56":  {
-                   "DefaultOCprofile":  "Profile2",
-                   "Algorithm":  "",
-                   "ExcludeAlgorithm":  "",
-                   "MinerName":  "",
-                   "ExcludeMinerName":  "XMRIG",
-                   "DisableDualMining":  "",
-                   "PowerAdjust":  "100",
-                   "Worker":  ""
-               }
+            }
 }
