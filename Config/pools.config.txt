@@ -1257,8 +1257,6 @@
                  },
     "NLpool":  {
                    "Penalty":  15,
-                   "BTC":  "$Wallet",
-                   "BTC-Params":  "d=0.0001",
                    "LTC":  "$LTC",
                    "LTC-Params":  "d=0.0001",
                    "Worker":  "$WorkerName",
@@ -1528,8 +1526,6 @@
                    },
     "ZergPool":  {
                      "Penalty":  "15",
-                     "BTC":  "$Wallet",
-                     "BTC-Params":  "d=0.0001",
                      "LTC":  "$LTC",
                      "LTC-Params":  "d=0.0001",
                      "Worker":  "$WorkerName",
@@ -1549,7 +1545,7 @@
                      "EnableAutoCoin":  "0",
                      "EnablePostBlockMining":  "0",
                      "FocusWallet":  "",
-                     "AllowZero":  "0"
+                     "AllowZero":  "1"
                  },
     "ZergPoolCoins":  {
                           "AECurrency":  "",
